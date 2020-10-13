@@ -17,13 +17,13 @@ jobs:
       - name: Set some helpers commands
         id: util
         run: |
-          echo "::set-output set-env='cmake -P ${{ github.workspace }}/set-env.cmake --'"
-          echo "::set-output add-path:='cmake -P ${{ github.workspace }}/add-path.cmake --'"
+          echo "::set-output set_env=cmake\ -P\ ${{ github.workspace }}/set_env.cmake\ --"
+          echo "::set-output add_path:=cmake\ -P\ ${{ github.workspace }}/add_path.cmake\ --"
 
       - name: Add some environment vars
         run: |
-          ${{ steps.util.outputs.set-env }} TEST_VAR="Hello" OTHER_VAR="World"
-          ${{ steps.util.outputs.add-path }} "${{ github.workspace }}" "/test/dir"
+          ${{ steps.util.outputs.set_env }} TEST_VAR="Hello" OTHER_VAR="World"
+          ${{ steps.util.outputs.add_path }} "${{ github.workspace }}" "/test/dir"
 
       - name: Echo result on windows
         if: ${{ matrix.os }} == 'windows-latest'

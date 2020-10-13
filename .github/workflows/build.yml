@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        # is there a better way to set variables for later use? ::set-output seems clumsy.
+        set-env: cmake -P ${{ github.workspace }}/set-env.cmake --
+        add-path: cmake -P ${{ github.workspace }}/add-path.cmake -- 
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add some environment vars
+        run: |
+          ${{ matrix.set-env }} TEST_VAR="Hello" OTHER_VAR="World"
+          ${{ matrix.add-path }} "${{ github.workspace }}" "/test/dir"
+
+      - name: Echo result on windows
+        if: ${{ matrix.os }} == 'windows-latest'
+        run: |
+          echo "Environment:"
+          echo "TEST_VAR: %TEST_VAR%"
+          echo "OTHER_VAR: %OTHER_VAR%"
+          echo ""
+          echo "Path:"
+          echo %PATH%
+      
+      - name: Echo result on linux/macos
+        if: ${{ matrix.os }} != 'windows-latest'
+        run: |
+          echo "Environment:"
+          echo "TEST_VAR: $TEST_VAR"
+          echo "OTHER_VAR: $OTHER_VAR"
+          echo ""
+          echo "Path:"
+          echo $PATH

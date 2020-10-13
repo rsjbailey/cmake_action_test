@@ -11,9 +11,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
-    set-env: 'cmake -P ${{ github.workspace }}/set-env.cmake --'
-    add-path: 'cmake -P ${{ github.workspace }}/add-path.cmake --'
-
     steps:
       - uses: actions/checkout@v2
       

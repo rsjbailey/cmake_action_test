@@ -14,28 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Set some helpers commands
+      - name: Set some helper commands
         id: util
         run: |
           echo "::set-output name=set_env::cmake -P ${{ github.workspace }}/set_env.cmake --"
           echo "::set-output name=add_path::cmake -P ${{ github.workspace }}/add_path.cmake --"
 
-      - name: Add some environment vars
+      - name: Add some environment vars and append to PATH
         run: |
           ${{ steps.util.outputs.set_env }} TEST_VAR="Hello" OTHER_VAR="World"
           ${{ steps.util.outputs.add_path }} "${{ github.workspace }}" "/test/dir"
-        
-      - name: Echo contents of files
-        if: matrix.os != 'windows-latest'
-        run: |
-          cat ${GITHUB_ENV}
-          cat ${GITHUB_PATH}
-      
-      - name: Echo contents of files
-        if: matrix.os == 'windows-latest'
-        run: |
-          cat $env:GITHUB_ENV
-          cat $env:GITHUB_PATH
           
       - name: Echo result on windows
         if: matrix.os == 'windows-latest'

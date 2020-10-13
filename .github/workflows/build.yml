@@ -22,8 +22,8 @@ jobs:
 
       - name: Add some environment vars
         run: |
-          ${{ util.output.set-env }} TEST_VAR="Hello" OTHER_VAR="World"
-          ${{ util.output.add-path }} "${{ github.workspace }}" "/test/dir"
+          ${{ steps.util.outputs.set-env }} TEST_VAR="Hello" OTHER_VAR="World"
+          ${{ steps.util.outputs.add-path }} "${{ github.workspace }}" "/test/dir"
 
       - name: Echo result on windows
         if: ${{ matrix.os }} == 'windows-latest'

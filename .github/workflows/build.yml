@@ -17,8 +17,8 @@ jobs:
       - name: Set some helpers commands
         id: util
         run: |
-          echo "::set-output set_env=cmake\ -P\ ${{ github.workspace }}/set_env.cmake\ --"
-          echo "::set-output add_path:=cmake\ -P\ ${{ github.workspace }}/add_path.cmake\ --"
+          echo "::set-output name=set_env::cmake\ -P\ ${{ github.workspace }}/set_env.cmake\ --"
+          echo "::set-output name=add_path::cmake\ -P\ ${{ github.workspace }}/add_path.cmake\ --"
 
       - name: Add some environment vars
         run: |

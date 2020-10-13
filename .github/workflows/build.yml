@@ -26,19 +26,19 @@ jobs:
           ${{ steps.util.outputs.add_path }} "${{ github.workspace }}" "/test/dir"
         
       - name: Echo contents of files
-        if: matrix.os != windows-latest
+        if: matrix.os != 'windows-latest'
         run: |
           cat ${GITHUB_ENV}
           cat ${GITHUB_PATH}
       
       - name: Echo contents of files
-        if: matrix.os == windows-latest
+        if: matrix.os == 'windows-latest'
         run: |
           cat $env:GITHUB_ENV
           cat $env:GITHUB_PATH
           
       - name: Echo result on windows
-        if: matrix.os == windows-latest
+        if: matrix.os == 'windows-latest'
         run: |
           echo "Environment:"
           echo "TEST_VAR: $env:TEST_VAR"
@@ -47,7 +47,7 @@ jobs:
           echo "Path: $env:PATH"
       
       - name: Echo result on linux/macos
-        if: matrix.os != windows-latest
+        if: matrix.os != 'windows-latest'
         run: |
           echo "Environment:"
           echo "TEST_VAR: $TEST_VAR"

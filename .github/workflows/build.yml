@@ -11,8 +11,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         # is there a better way to set variables for later use? ::set-output seems clumsy.
-        set-env: cmake -P ${{ github.workspace }}/set-env.cmake --
-        add-path: cmake -P ${{ github.workspace }}/add-path.cmake -- 
+        set-env: 'cmake -P ${{ github.workspace }}/set-env.cmake --'
+        add-path: 'cmake -P ${{ github.workspace }}/add-path.cmake --'
 
     steps:
       - uses: actions/checkout@v2

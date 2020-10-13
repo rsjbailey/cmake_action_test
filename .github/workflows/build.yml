@@ -21,8 +21,8 @@ jobs:
           echo "::set-output name=add_path::cmake\ -P\ ${{ github.workspace }}/add_path.cmake\ --"
 
       - name: Add some environment vars
+        # ${{ steps.util.outputs.add_path }} "${{ github.workspace }}" "/test/dir"
         run: |
-          ${{ steps.util.outputs.add_path }} "${{ github.workspace }}" "/test/dir"
           ${{ steps.util.outputs.set_env }} TEST_VAR="Hello" OTHER_VAR="World"
           
       - name: Echo result on windows

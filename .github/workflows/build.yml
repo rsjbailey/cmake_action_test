@@ -24,6 +24,11 @@ jobs:
         run: |
           ${{ steps.util.outputs.set_env }} TEST_VAR="Hello" OTHER_VAR="World"
       # ${{ steps.util.outputs.add_path }} "${{ github.workspace }}" "/test/dir"
+        
+      - name: Echo contents of files
+        run: |
+          cat ${GITHUB_ENV}
+          cat ${GITHUB_PATH}
           
       - name: Echo result on windows
         if: ${{ matrix.os }} == windows-latest
